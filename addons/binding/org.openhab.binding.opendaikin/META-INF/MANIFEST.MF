@@ -11,8 +11,9 @@ Export-Package:
  org.openhab.binding.opendaikin,
  org.openhab.binding.opendaikin.handler
 Import-Package: 
- org.openhab.binding.opendaikin,
- org.openhab.binding.opendaikin.handler,
+ com.google.gson;version="2.7.0",
+ javax.ws.rs.client;version="2.0.1",
+ javax.ws.rs.core;version="2.0.1",
  org.eclipse.jdt.annotation;resolution:=optional,
  org.eclipse.smarthome.config.core,
  org.eclipse.smarthome.core.library.types,
@@ -21,5 +22,7 @@ Import-Package:
  org.eclipse.smarthome.core.thing.binding.builder,
  org.eclipse.smarthome.core.thing.type,
  org.eclipse.smarthome.core.types,
+ org.openhab.binding.opendaikin,
+ org.openhab.binding.opendaikin.handler,
  org.slf4j
 Service-Component: OSGI-INF/*.xml
