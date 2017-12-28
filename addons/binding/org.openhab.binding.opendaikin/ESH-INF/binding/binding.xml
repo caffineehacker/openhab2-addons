@@ -6,6 +6,6 @@
 
 	<name>OpenDaikin Binding</name>
 	<description>This is the binding for OpenDaikin.</description>
-	<author>Tim Waterhouse <tim@timwaterhouse.com></author>
+	<author>Tim Waterhouse</author>
 
 </binding:binding>

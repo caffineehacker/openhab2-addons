@@ -4,21 +4,33 @@
 						  xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
 						  xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
-	<!-- Sample Thing Type -->
-	<thing-type id="sample">
-		<label>OpenDaikin Binding Thing</label>
-		<description>Sample thing for OpenDaikin Binding</description>
+	<thing-type id="ac_unit">
+		<label>Daikin AC Unit</label>
+		<description>Daikin AC Unit</description>
 
 		<channels>
-			<channel id="channel1" typeId="sample-channel"/>
+			<channel id="power" typeId="acunit-power"/>
 		</channels>
+		
+		<config-description>
+            <parameter name="host" type="text" required="true">
+                <label>Host</label>
+                <description>The Host address of the Daikin AC unit.</description>
+                <context>network_address</context>
+            </parameter>
+            <parameter name="refresh" type="integer" required="false">
+                <label>Refresh Interval</label>
+                <description>The number of milliseconds between fetches of the AC unit state.</description>
+                <default>60000</default>
+            </parameter>
+        </config-description>
 	</thing-type>
 
 	<!-- Sample Channel Type -->
-	<channel-type id="sample-channel">
-		<item-type>opendaikinItem</item-type>
-		<label>OpenDaikin Binding Channel</label>
-		<description>Sample channel for OpenDaikin Binding</description>
+	<channel-type id="acunit-power">
+		<item-type>Switch</item-type>
+		<label>Power</label>
+		<description>Power for the AC unit</description>
 	</channel-type>
 
 </thing:thing-descriptions>

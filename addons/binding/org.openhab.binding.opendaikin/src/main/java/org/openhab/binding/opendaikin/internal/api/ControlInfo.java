@@ -1,5 +1,9 @@
 package org.openhab.binding.opendaikin.internal.api;
 
+import org.openhab.binding.opendaikin.handler.OpenDaikinAcUnitHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ControlInfo {
     public enum Mode {
         AUTO(0),
@@ -89,6 +93,8 @@ public class ControlInfo {
         }
     }
 
+    private static Logger logger = LoggerFactory.getLogger(OpenDaikinAcUnitHandler.class);
+
     public boolean power;
     public Mode mode;
     /** Degrees in Celsius. */
@@ -102,12 +108,15 @@ public class ControlInfo {
     }
 
     public static ControlInfo parse(String response) {
+        // TODO: Change to debug
+        logger.error("Parsing {}", response);
         ControlInfo info = new ControlInfo();
 
         for (String keyValuePair : response.split(",")) {
             if (keyValuePair.contains("=")) {
-                String key = keyValuePair.split("=")[0];
-                String value = keyValuePair.split("=")[1];
+                String[] keyValue = keyValuePair.split("=");
+                String key = keyValue[0];
+                String value = keyValue.length > 1 ? keyValue[1] : "";
 
                 switch (key) {
                     case "pow":
