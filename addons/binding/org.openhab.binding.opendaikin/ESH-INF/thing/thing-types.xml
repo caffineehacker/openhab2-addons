@@ -17,6 +17,8 @@
             <channel id="outdoortempc" typeId="acunit-outdoortempc"/>
             <channel id="outdoortempf" typeId="acunit-outdoortempf"/>
             <channel id="humidity" typeId="acunit-humidity"/>
+            <channel id="mode" typeId="acunit-mode"/>
+            <channel id="fanspeed" typeId="acunit-fan"/>
 		</channels>
 		
 		<config-description>
@@ -92,6 +94,38 @@
         <label>Indoor Humidity</label>
         <description>The indoor humidity as measured by the A/C unit</description>
         <state readOnly="true" pattern="%.0f%%" />
+    </channel-type>
+    
+    <channel-type id="acunit-mode">
+        <item-type>String</item-type>
+        <label>Mode</label>
+        <description>Current mode of the AC unit</description>
+        <state>
+            <options>
+                <option value="AUTO">auto</option>
+                <option value="DEHUMIDIFIER">dehumidifier</option>
+                <option value="COLD">cooling</option>
+                <option value="HEAT">heating</option>
+                <option value="FAN">fan</option>
+            </options>
+        </state>
+    </channel-type>
+    
+    <channel-type id="acunit-fan">
+        <item-type>String</item-type>
+        <label>Fan</label>
+        <description>Current fan speed setting of the AC unit</description>
+        <state>
+            <options>
+                <option value="AUTO">auto</option>
+                <option value="SILENCE">silence</option>
+                <option value="LEVEL_1">level 1</option>
+                <option value="LEVEL_2">level 2</option>
+                <option value="LEVEL_3">level 3</option>
+                <option value="LEVEL_4">level 4</option>
+                <option value="LEVEL_5">level 5</option>
+            </options>
+        </state>
     </channel-type>
 
 </thing:thing-descriptions>

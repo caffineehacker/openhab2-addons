@@ -17,6 +17,7 @@ import javax.ws.rs.client.ClientBuilder;
 
 import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
+import org.eclipse.smarthome.core.library.types.StringType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingStatus;
@@ -72,6 +73,20 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
             case OpenDaikinBindingConstants.CHANNEL_AC_TEMPF:
                 if (command instanceof DecimalType) {
                     changeSetPointF(((DecimalType) command).doubleValue());
+                } else {
+                    logger.warn("Received command of wrong type");
+                }
+                break;
+            case OpenDaikinBindingConstants.CHANNEL_AC_FAN_SPEED:
+                if (command instanceof StringType) {
+                    changeFanSpeed(ControlInfo.FanSpeed.valueOf(((StringType) command).toString()));
+                } else {
+                    logger.warn("Received command of wrong type");
+                }
+                break;
+            case OpenDaikinBindingConstants.CHANNEL_AC_MODE:
+                if (command instanceof StringType) {
+                    changeMode(ControlInfo.Mode.valueOf(((StringType) command).toString()));
                 } else {
                     logger.warn("Received command of wrong type");
                 }
@@ -147,6 +162,9 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_POWER, controlInfo.power ? OnOffType.ON : OnOffType.OFF);
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPC, new DecimalType(controlInfo.temp));
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPF, new DecimalType(cToF(controlInfo.temp)));
+
+            updateState(OpenDaikinBindingConstants.CHANNEL_AC_MODE, new StringType(controlInfo.mode.name()));
+            updateState(OpenDaikinBindingConstants.CHANNEL_AC_FAN_SPEED, new StringType(controlInfo.fanSpeed.name()));
         }
 
         SensorInfo sensorInfo = webTargets.getSensorInfo();
@@ -203,6 +221,18 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
 
     private void changeSetPointF(double tempf) {
         changeSetPointC(fToC(tempf));
+    }
+
+    private void changeMode(ControlInfo.Mode mode) {
+        ControlInfo info = webTargets.getControlInfo();
+        info.mode = mode;
+        webTargets.setControlInfo(info);
+    }
+
+    private void changeFanSpeed(ControlInfo.FanSpeed fanSpeed) {
+        ControlInfo info = webTargets.getControlInfo();
+        info.fanSpeed = fanSpeed;
+        webTargets.setControlInfo(info);
     }
 
     private double cToF(double tempc) {

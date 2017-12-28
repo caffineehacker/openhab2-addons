@@ -36,7 +36,8 @@ public class OpenDaikinBindingConstants {
     public static final String CHANNEL_OUTDOOR_TEMPC = "outdoortempc";
     public static final String CHANNEL_OUTDOOR_TEMPF = "outdoortempf";
     public static final String CHANNEL_AC_POWER = "power";
-    public static final String CHANNEL_AC_FAN_SPEED = "fanSpeed";
+    public static final String CHANNEL_AC_MODE = "mode";
+    public static final String CHANNEL_AC_FAN_SPEED = "fanspeed";
     public static final String CHANNEL_HUMIDITY = "humidity";
 
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = new HashSet<>();
