@@ -1,5 +1,7 @@
 package org.openhab.binding.opendaikin.internal.api;
 
+import javax.ws.rs.client.WebTarget;
+
 import org.openhab.binding.opendaikin.handler.OpenDaikinAcUnitHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,7 @@ public class ControlInfo {
         }
 
         public int getValue() {
-            return this.value;
+            return value;
         }
 
         public static Mode fromValue(int value) {
@@ -50,7 +52,7 @@ public class ControlInfo {
         }
 
         public String getValue() {
-            return this.value;
+            return value;
         }
 
         public static FanSpeed fromValue(String value) {
@@ -78,7 +80,7 @@ public class ControlInfo {
         }
 
         public int getValue() {
-            return this.value;
+            return value;
         }
 
         public static FanMovement fromValue(int value) {
@@ -102,14 +104,13 @@ public class ControlInfo {
     public FanSpeed fanSpeed;
     public FanMovement fanMovement;
     /* Not supported by all units. Sets the target humidity for dehumidifying. */
-    public double targetHumidity;
+    public int targetHumidity;
 
     private ControlInfo() {
     }
 
     public static ControlInfo parse(String response) {
-        // TODO: Change to debug
-        logger.error("Parsing {}", response);
+        logger.debug("Parsing {}", response);
         ControlInfo info = new ControlInfo();
 
         for (String keyValuePair : response.split(",")) {
@@ -135,11 +136,17 @@ public class ControlInfo {
                         info.fanMovement = FanMovement.fromValue(Integer.parseInt(value));
                         break;
                     case "shum":
-                        info.targetHumidity = Double.parseDouble(value);
+                        info.targetHumidity = Integer.parseInt(value);
                 }
             }
         }
 
         return info;
+    }
+
+    public WebTarget getParamString(WebTarget target) {
+        return target.queryParam("pow", power ? 1 : 0).queryParam("mode", mode.getValue()).queryParam("stemp", temp)
+                .queryParam("f_rate", fanSpeed.getValue()).queryParam("f_dir", fanMovement.getValue())
+                .queryParam("shum", targetHumidity);
     }
 }

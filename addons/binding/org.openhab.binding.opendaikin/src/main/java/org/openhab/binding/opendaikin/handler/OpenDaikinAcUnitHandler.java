@@ -49,6 +49,17 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
 
     @Override
     public void handleCommand(ChannelUID channelUID, Command command) {
+        switch (channelUID.getId()) {
+            case OpenDaikinBindingConstants.CHANNEL_AC_POWER:
+                if (command instanceof OnOffType) {
+                    changePower(((OnOffType) command).equals(OnOffType.ON));
+                } else {
+                    logger.warn("Received command of wrong type");
+                }
+                break;
+        }
+
+        poll();
     }
 
     @Override
@@ -127,4 +138,9 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
 
     };
 
+    private void changePower(boolean power) {
+        ControlInfo info = webTargets.getControlParameters();
+        info.power = power;
+        webTargets.setControlParameters(info);
+    }
 }

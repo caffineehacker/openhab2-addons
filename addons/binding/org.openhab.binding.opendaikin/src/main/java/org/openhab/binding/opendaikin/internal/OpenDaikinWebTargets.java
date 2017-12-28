@@ -25,7 +25,12 @@ public class OpenDaikinWebTargets {
     public ControlInfo getControlParameters() {
         String response = invoke(getControlInfo.request().buildGet(), getControlInfo);
         return ControlInfo.parse(response);
+    }
 
+    public void setControlParameters(ControlInfo info) {
+        WebTarget target = info.getParamString(setControlInfo);
+        logger.debug("Calling this url: {}", target.getUri().toString());
+        invoke(target.request().buildGet(), target);
     }
 
     private String invoke(Invocation invocation, WebTarget target) {
