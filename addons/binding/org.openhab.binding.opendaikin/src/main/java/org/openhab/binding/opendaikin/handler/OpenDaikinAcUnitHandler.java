@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
+import org.eclipse.smarthome.core.library.types.DecimalType;
 import org.eclipse.smarthome.core.library.types.OnOffType;
 import org.eclipse.smarthome.core.thing.ChannelUID;
 import org.eclipse.smarthome.core.thing.Thing;
@@ -55,6 +56,16 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
                     changePower(((OnOffType) command).equals(OnOffType.ON));
                 } else {
                     logger.warn("Received command of wrong type");
+                }
+                break;
+            case OpenDaikinBindingConstants.CHANNEL_AC_TEMPC:
+                if (command instanceof DecimalType) {
+                    changeSetPointC(((DecimalType) command).doubleValue());
+                }
+                break;
+            case OpenDaikinBindingConstants.CHANNEL_AC_TEMPF:
+                if (command instanceof DecimalType) {
+                    changeSetPointF(((DecimalType) command).doubleValue());
                 }
                 break;
         }
@@ -142,5 +153,15 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
         ControlInfo info = webTargets.getControlParameters();
         info.power = power;
         webTargets.setControlParameters(info);
+    }
+
+    private void changeSetPointC(double tempc) {
+        ControlInfo info = webTargets.getControlParameters();
+        info.temp = tempc;
+        webTargets.setControlParameters(info);
+    }
+
+    private void changeSetPointF(double tempf) {
+        changeSetPointC((tempf - 32.0) / 1.8);
     }
 }

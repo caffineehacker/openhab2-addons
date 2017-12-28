@@ -10,6 +10,8 @@
 
 		<channels>
 			<channel id="power" typeId="acunit-power"/>
+			<channel id="settempc" typeId="acunit-settempc"/>
+			<channel id="settempf" typeId="acunit-settempf"/>
 		</channels>
 		
 		<config-description>
@@ -26,11 +28,26 @@
         </config-description>
 	</thing-type>
 
-	<!-- Sample Channel Type -->
 	<channel-type id="acunit-power">
 		<item-type>Switch</item-type>
 		<label>Power</label>
 		<description>Power for the AC unit</description>
 	</channel-type>
+	
+	<channel-type id="acunit-settempc">
+        <item-type>Number</item-type>
+        <label>Set Point C</label>
+        <description>The set point in degrees Celsius</description>
+        <category>Temperature</category>
+        <state pattern="%.1f °C" step="0.5" />
+    </channel-type>
+    
+    <channel-type id="acunit-settempf">
+        <item-type>Number</item-type>
+        <label>Set Point F</label>
+        <description>The set point in degrees Fahrenheit</description>
+        <category>Temperature</category>
+        <state pattern="%.1f °F" step="0.5" />
+    </channel-type>
 
 </thing:thing-descriptions>

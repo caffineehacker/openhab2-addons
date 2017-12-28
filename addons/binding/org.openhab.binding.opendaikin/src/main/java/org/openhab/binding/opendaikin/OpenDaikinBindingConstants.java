@@ -33,13 +33,14 @@ public class OpenDaikinBindingConstants {
     public static final ThingTypeUID THING_TYPE_AC_UNIT = new ThingTypeUID(BINDING_ID, "ac_unit");
 
     // List of all Channel ids
-    public static final String CHANNEL_AC_TEMP = "temp";
+    public static final String CHANNEL_AC_TEMPC = "settempc";
+    public static final String CHANNEL_AC_TEMPF = "settempf";
+    public static final String CHANNEL_ROOM_TEMPC = "roomtempc";
+    public static final String CHANNEL_ROOM_TEMPF = "roomtempf";
+    public static final String CHANNEL_OUTSIDE_TEMPC = "outsidetempc";
+    public static final String CHANNEL_OUTSIDE_TEMPF = "outsidetempf";
     public static final String CHANNEL_AC_POWER = "power";
     public static final String CHANNEL_AC_FAN_SPEED = "fanSpeed";
-
-    public static final String CHANNELTYPE_SCENE_ACTIVATE = "scene-activate";
-
-    public static final String NETBIOS_NAME = "PDBU-Hub3.0";
 
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = new HashSet<>();
 
