@@ -31,12 +31,13 @@ public class OpenDaikinBindingConstants {
     // List of all Channel ids
     public static final String CHANNEL_AC_TEMPC = "settempc";
     public static final String CHANNEL_AC_TEMPF = "settempf";
-    public static final String CHANNEL_ROOM_TEMPC = "roomtempc";
-    public static final String CHANNEL_ROOM_TEMPF = "roomtempf";
-    public static final String CHANNEL_OUTSIDE_TEMPC = "outsidetempc";
-    public static final String CHANNEL_OUTSIDE_TEMPF = "outsidetempf";
+    public static final String CHANNEL_INDOOR_TEMPC = "indoortempc";
+    public static final String CHANNEL_INDOOR_TEMPF = "indoortempf";
+    public static final String CHANNEL_OUTDOOR_TEMPC = "outdoortempc";
+    public static final String CHANNEL_OUTDOOR_TEMPF = "outdoortempf";
     public static final String CHANNEL_AC_POWER = "power";
     public static final String CHANNEL_AC_FAN_SPEED = "fanSpeed";
+    public static final String CHANNEL_HUMIDITY = "humidity";
 
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = new HashSet<>();
 

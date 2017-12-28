@@ -12,6 +12,11 @@
 			<channel id="power" typeId="acunit-power"/>
 			<channel id="settempc" typeId="acunit-settempc"/>
 			<channel id="settempf" typeId="acunit-settempf"/>
+			<channel id="indoortempc" typeId="acunit-indoortempc"/>
+            <channel id="indoortempf" typeId="acunit-indoortempf"/>
+            <channel id="outdoortempc" typeId="acunit-outdoortempc"/>
+            <channel id="outdoortempf" typeId="acunit-outdoortempf"/>
+            <channel id="humidity" typeId="acunit-humidity"/>
 		</channels>
 		
 		<config-description>
@@ -48,6 +53,45 @@
         <description>The set point in degrees Fahrenheit</description>
         <category>Temperature</category>
         <state pattern="%.0f °F" step="1.0" />
+    </channel-type>
+    
+    <channel-type id="acunit-indoortempc">
+        <item-type>Number</item-type>
+        <label>Inside Temperature C</label>
+        <description>The indoor temperature in degrees Celsius</description>
+        <category>Temperature</category>
+        <state readOnly="true" pattern="%.1f °C" step="0.5" />
+    </channel-type>
+    
+    <channel-type id="acunit-indoortempf">
+        <item-type>Number</item-type>
+        <label>Inside Temperature F</label>
+        <description>The indoor temperature in degrees Fahrenheit</description>
+        <category>Temperature</category>
+        <state readOnly="true" pattern="%.0f °F" step="1.0" />
+    </channel-type>
+    
+    <channel-type id="acunit-outdoortempc">
+        <item-type>Number</item-type>
+        <label>Inside Temperature C</label>
+        <description>The outdoor temperature in degrees Celsius</description>
+        <category>Temperature</category>
+        <state readOnly="true" pattern="%.1f °C" step="0.5" />
+    </channel-type>
+    
+    <channel-type id="acunit-outdoortempf">
+        <item-type>Number</item-type>
+        <label>Inside Temperature F</label>
+        <description>The outdoor temperature in degrees Fahrenheit</description>
+        <category>Temperature</category>
+        <state readOnly="true" pattern="%.0f °F" step="1.0" />
+    </channel-type>
+    
+    <channel-type id="acunit-humidity">
+        <item-type>Number</item-type>
+        <label>Indoor Humidity</label>
+        <description>The indoor humidity as measured by the A/C unit</description>
+        <state readOnly="true" pattern="%.0f%%" />
     </channel-type>
 
 </thing:thing-descriptions>

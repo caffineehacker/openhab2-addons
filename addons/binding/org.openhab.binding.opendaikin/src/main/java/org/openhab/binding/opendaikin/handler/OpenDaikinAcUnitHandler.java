@@ -26,6 +26,7 @@ import org.eclipse.smarthome.core.types.Command;
 import org.openhab.binding.opendaikin.OpenDaikinBindingConstants;
 import org.openhab.binding.opendaikin.internal.OpenDaikinWebTargets;
 import org.openhab.binding.opendaikin.internal.api.ControlInfo;
+import org.openhab.binding.opendaikin.internal.api.SensorInfo;
 import org.openhab.binding.opendaikin.internal.config.OpenDaikinConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,12 +140,24 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
     }
 
     private void pollStatus() throws IOException {
-        ControlInfo controlInfo = webTargets.getControlParameters();
+        ControlInfo controlInfo = webTargets.getControlInfo();
         updateStatus(ThingStatus.ONLINE);
         if (controlInfo != null) {
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_POWER, controlInfo.power ? OnOffType.ON : OnOffType.OFF);
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPC, new DecimalType(controlInfo.temp));
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPF, new DecimalType(cToF(controlInfo.temp)));
+        }
+
+        SensorInfo sensorInfo = webTargets.getSensorInfo();
+        if (sensorInfo != null) {
+            updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPC, new DecimalType(sensorInfo.indoortemp));
+            updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPF, new DecimalType(cToF(sensorInfo.indoortemp)));
+
+            updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPC, new DecimalType(sensorInfo.outdoortemp));
+            updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPF,
+                    new DecimalType(cToF(sensorInfo.outdoortemp)));
+
+            updateState(OpenDaikinBindingConstants.CHANNEL_HUMIDITY, new DecimalType(sensorInfo.indoorhumidity));
         }
     }
 
@@ -158,15 +171,15 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
     };
 
     private void changePower(boolean power) {
-        ControlInfo info = webTargets.getControlParameters();
+        ControlInfo info = webTargets.getControlInfo();
         info.power = power;
-        webTargets.setControlParameters(info);
+        webTargets.setControlInfo(info);
     }
 
     private void changeSetPointC(double tempc) {
-        ControlInfo info = webTargets.getControlParameters();
+        ControlInfo info = webTargets.getControlInfo();
         info.temp = tempc;
-        webTargets.setControlParameters(info);
+        webTargets.setControlInfo(info);
     }
 
     private void changeSetPointF(double tempf) {
