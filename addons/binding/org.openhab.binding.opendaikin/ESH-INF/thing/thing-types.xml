@@ -35,7 +35,7 @@
 	</channel-type>
 	
 	<channel-type id="acunit-settempc">
-        <item-type>Number</item-type>
+        <item-type>Setpoint</item-type>
         <label>Set Point C</label>
         <description>The set point in degrees Celsius</description>
         <category>Temperature</category>
@@ -43,11 +43,11 @@
     </channel-type>
     
     <channel-type id="acunit-settempf">
-        <item-type>Number</item-type>
+        <item-type>Setpoint</item-type>
         <label>Set Point F</label>
         <description>The set point in degrees Fahrenheit</description>
         <category>Temperature</category>
-        <state pattern="%.1f °F" step="0.5" />
+        <state pattern="%.0f °F" step="1.0" />
     </channel-type>
 
 </thing:thing-descriptions>

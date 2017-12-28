@@ -17,6 +17,12 @@ import org.openhab.binding.opendaikin.internal.api.ControlInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Handles performing the actual HTTP requests for communicating with Daiking air conditioning units.
+ *
+ * @author Tim Waterhouse - Initial Contribution
+ *
+ */
 public class OpenDaikinWebTargets {
 
     private WebTarget base;

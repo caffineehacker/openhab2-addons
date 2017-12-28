@@ -14,6 +14,12 @@ import org.openhab.binding.opendaikin.handler.OpenDaikinAcUnitHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class for holding the set of parameters used by set and get control info.
+ *
+ * @author Tim Waterhouse - Initial Contribution
+ *
+ */
 public class ControlInfo {
     public enum Mode {
         AUTO(0),

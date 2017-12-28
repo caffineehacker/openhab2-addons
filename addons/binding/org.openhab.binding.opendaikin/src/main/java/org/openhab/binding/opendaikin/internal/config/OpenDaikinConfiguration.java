@@ -8,6 +8,12 @@
  */
 package org.openhab.binding.opendaikin.internal.config;
 
+/**
+ * Holds configuration data for a Daikin air conditioning unit.
+ *
+ * @author Tim Waterhouse - Initial contribution
+ *
+ */
 public class OpenDaikinConfiguration {
     public static String HOST = "host";
 

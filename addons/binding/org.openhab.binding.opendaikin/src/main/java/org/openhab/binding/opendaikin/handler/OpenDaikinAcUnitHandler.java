@@ -30,6 +30,12 @@ import org.openhab.binding.opendaikin.internal.config.OpenDaikinConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Handles communicating with a Daikin air conditioning unit.
+ *
+ * @author Tim Waterhouse - Initial Contribution
+ *
+ */
 public class OpenDaikinAcUnitHandler extends BaseThingHandler {
 
     private Logger logger = LoggerFactory.getLogger(OpenDaikinAcUnitHandler.class);
@@ -57,11 +63,15 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
             case OpenDaikinBindingConstants.CHANNEL_AC_TEMPC:
                 if (command instanceof DecimalType) {
                     changeSetPointC(((DecimalType) command).doubleValue());
+                } else {
+                    logger.warn("Received command of wrong type");
                 }
                 break;
             case OpenDaikinBindingConstants.CHANNEL_AC_TEMPF:
                 if (command instanceof DecimalType) {
                     changeSetPointF(((DecimalType) command).doubleValue());
+                } else {
+                    logger.warn("Received command of wrong type");
                 }
                 break;
         }
@@ -133,6 +143,8 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
         updateStatus(ThingStatus.ONLINE);
         if (controlInfo != null) {
             updateState(OpenDaikinBindingConstants.CHANNEL_AC_POWER, controlInfo.power ? OnOffType.ON : OnOffType.OFF);
+            updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPC, new DecimalType(controlInfo.temp));
+            updateState(OpenDaikinBindingConstants.CHANNEL_AC_TEMPF, new DecimalType(cToF(controlInfo.temp)));
         }
     }
 
@@ -158,6 +170,18 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
     }
 
     private void changeSetPointF(double tempf) {
-        changeSetPointC((tempf - 32.0) / 1.8);
+        changeSetPointC(fToC(tempf));
+    }
+
+    private double cToF(double tempc) {
+        return Math.round((tempc * 1.8) + 32);
+    }
+
+    private double fToC(double tempf) {
+        return roundToNearestHalf((tempf - 32.0) / 1.8);
+    }
+
+    private double roundToNearestHalf(double temp) {
+        return Math.round(temp * 2.0) / 2.0;
     }
 }
