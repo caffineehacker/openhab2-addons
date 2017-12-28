@@ -40,7 +40,7 @@
 	</channel-type>
 	
 	<channel-type id="acunit-settempc">
-        <item-type>Setpoint</item-type>
+        <item-type>Number</item-type>
         <label>Set Point C</label>
         <description>The set point in degrees Celsius</description>
         <category>Temperature</category>
@@ -48,7 +48,7 @@
     </channel-type>
     
     <channel-type id="acunit-settempf">
-        <item-type>Setpoint</item-type>
+        <item-type>Number</item-type>
         <label>Set Point F</label>
         <description>The set point in degrees Fahrenheit</description>
         <category>Temperature</category>
@@ -57,7 +57,7 @@
     
     <channel-type id="acunit-indoortempc">
         <item-type>Number</item-type>
-        <label>Inside Temperature C</label>
+        <label>Indoor Temperature C</label>
         <description>The indoor temperature in degrees Celsius</description>
         <category>Temperature</category>
         <state readOnly="true" pattern="%.1f °C" step="0.5" />
@@ -65,7 +65,7 @@
     
     <channel-type id="acunit-indoortempf">
         <item-type>Number</item-type>
-        <label>Inside Temperature F</label>
+        <label>Indoor Temperature F</label>
         <description>The indoor temperature in degrees Fahrenheit</description>
         <category>Temperature</category>
         <state readOnly="true" pattern="%.0f °F" step="1.0" />
@@ -73,7 +73,7 @@
     
     <channel-type id="acunit-outdoortempc">
         <item-type>Number</item-type>
-        <label>Inside Temperature C</label>
+        <label>Outdoor Temperature C</label>
         <description>The outdoor temperature in degrees Celsius</description>
         <category>Temperature</category>
         <state readOnly="true" pattern="%.1f °C" step="0.5" />
@@ -81,7 +81,7 @@
     
     <channel-type id="acunit-outdoortempf">
         <item-type>Number</item-type>
-        <label>Inside Temperature F</label>
+        <label>Outdoor Temperature F</label>
         <description>The outdoor temperature in degrees Fahrenheit</description>
         <category>Temperature</category>
         <state readOnly="true" pattern="%.0f °F" step="1.0" />

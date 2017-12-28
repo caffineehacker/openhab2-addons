@@ -8,6 +8,8 @@
  */
 package org.openhab.binding.opendaikin.internal.api;
 
+import java.util.Optional;
+
 import org.openhab.binding.opendaikin.handler.OpenDaikinAcUnitHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +23,9 @@ import org.slf4j.LoggerFactory;
 public class SensorInfo {
     private static Logger logger = LoggerFactory.getLogger(OpenDaikinAcUnitHandler.class);
 
-    public double indoortemp;
-    public double indoorhumidity;
-    public double outdoortemp;
+    public Optional<Double> indoortemp;
+    public Optional<Double> indoorhumidity;
+    public Optional<Double> outdoortemp;
 
     private SensorInfo() {
     }
@@ -40,16 +42,28 @@ public class SensorInfo {
 
                 switch (key) {
                     case "htemp":
-                        info.indoortemp = Double.parseDouble(value);
+                        // "-" indicates no value
+                        if (!"-".equals(value)) {
+                            info.indoortemp = Optional.of(Double.parseDouble(value));
+                        } else {
+                            info.indoortemp = Optional.empty();
+                        }
                         break;
                     case "hhum":
                         // "-" indicates no value
                         if (!"-".equals(value)) {
-                            info.indoorhumidity = Double.parseDouble(value);
+                            info.indoorhumidity = Optional.of(Double.parseDouble(value));
+                        } else {
+                            info.indoorhumidity = Optional.empty();
                         }
                         break;
                     case "otemp":
-                        info.outdoortemp = Double.parseDouble(value);
+                        // "-" indicates no value
+                        if (!"-".equals(value)) {
+                            info.outdoortemp = Optional.of(Double.parseDouble(value));
+                        } else {
+                            info.outdoortemp = Optional.empty();
+                        }
                         break;
                 }
             }

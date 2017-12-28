@@ -23,6 +23,7 @@ import org.eclipse.smarthome.core.thing.ThingStatus;
 import org.eclipse.smarthome.core.thing.ThingStatusDetail;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandler;
 import org.eclipse.smarthome.core.types.Command;
+import org.eclipse.smarthome.core.types.UnDefType;
 import org.openhab.binding.opendaikin.OpenDaikinBindingConstants;
 import org.openhab.binding.opendaikin.internal.OpenDaikinWebTargets;
 import org.openhab.binding.opendaikin.internal.api.ControlInfo;
@@ -150,14 +151,32 @@ public class OpenDaikinAcUnitHandler extends BaseThingHandler {
 
         SensorInfo sensorInfo = webTargets.getSensorInfo();
         if (sensorInfo != null) {
-            updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPC, new DecimalType(sensorInfo.indoortemp));
-            updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPF, new DecimalType(cToF(sensorInfo.indoortemp)));
+            if (sensorInfo.indoortemp.isPresent()) {
+                updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPC,
+                        new DecimalType(sensorInfo.indoortemp.get()));
+                updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPF,
+                        new DecimalType(cToF(sensorInfo.indoortemp.get())));
+            } else {
+                updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPC, UnDefType.UNDEF);
+                updateState(OpenDaikinBindingConstants.CHANNEL_INDOOR_TEMPF, UnDefType.UNDEF);
+            }
 
-            updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPC, new DecimalType(sensorInfo.outdoortemp));
-            updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPF,
-                    new DecimalType(cToF(sensorInfo.outdoortemp)));
+            if (sensorInfo.outdoortemp.isPresent()) {
+                updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPC,
+                        new DecimalType(sensorInfo.outdoortemp.get()));
+                updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPF,
+                        new DecimalType(cToF(sensorInfo.outdoortemp.get())));
+            } else {
+                updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPC, UnDefType.UNDEF);
+                updateState(OpenDaikinBindingConstants.CHANNEL_OUTDOOR_TEMPF, UnDefType.UNDEF);
+            }
 
-            updateState(OpenDaikinBindingConstants.CHANNEL_HUMIDITY, new DecimalType(sensorInfo.indoorhumidity));
+            if (sensorInfo.indoorhumidity.isPresent()) {
+                updateState(OpenDaikinBindingConstants.CHANNEL_HUMIDITY,
+                        new DecimalType(sensorInfo.indoorhumidity.get()));
+            } else {
+                updateState(OpenDaikinBindingConstants.CHANNEL_HUMIDITY, UnDefType.UNDEF);
+            }
         }
     }
 
