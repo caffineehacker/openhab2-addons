@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2017 by the respective copyright holders.
+ * Copyright (c) 2010-2018 by the respective copyright holders.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -79,6 +79,9 @@ public abstract class RpcClient<T> {
         RpcRequest<T> request = createRpcRequest("init");
         request.addArg(getRpcCallbackUrl());
         request.addArg(clientId);
+        if (config.getGatewayInfo().isHomegear()) {
+            request.addArg(new Integer(0x22));
+        }
         sendMessage(config.getRpcPort(hmInterface), request);
     }
 
@@ -198,7 +201,7 @@ public abstract class RpcClient<T> {
      * exception.
      */
     private void setChannelDatapointValues(HmChannel channel) throws IOException {
-        for (HmDatapoint dp : channel.getDatapoints().values()) {
+        for (HmDatapoint dp : channel.getDatapoints()) {
             if (dp.isReadable() && !dp.isVirtual() && dp.getParamsetType() == HmParamsetType.VALUES) {
                 RpcRequest<T> request = createRpcRequest("getValue");
                 request.addArg(getRpcAddress(channel.getDevice().getAddress()) + ":" + channel.getNumber());

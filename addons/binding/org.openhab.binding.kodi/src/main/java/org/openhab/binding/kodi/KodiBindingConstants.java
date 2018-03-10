@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2017 by the respective copyright holders.
+ * Copyright (c) 2010-2018 by the respective copyright holders.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,7 +20,7 @@ import org.eclipse.smarthome.core.thing.ThingTypeUID;
  * @author Paul Frank - Initial contribution
  * @author Christoph Weitkamp - Added channels for opening PVR TV or Radio streams
  * @author Andreas Reinhardt & Christoph Weitkamp - Added channels for thumbnail and fanart
- * 
+ *
  */
 public class KodiBindingConstants {
 
@@ -50,6 +50,8 @@ public class KodiBindingConstants {
 
     public static final String CHANNEL_INPUT = "input";
     public static final String CHANNEL_INPUTTEXT = "inputtext";
+    public static final String CHANNEL_INPUTACTION = "inputaction";
+
     public static final String CHANNEL_SYSTEMCOMMAND = "systemcommand";
 
     public static final String CHANNEL_ARTIST = "artist";
@@ -68,4 +70,6 @@ public class KodiBindingConstants {
     public static final String MANUFACTURER = "XBMC Foundation";
     public static final String UPNP_DEVICE_TYPE = "MediaRenderer";
 
+    public static final String PVR_TV = "tv";
+    public static final String PVR_RADIO = "radio";
 }

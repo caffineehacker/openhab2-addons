@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2017 by the respective copyright holders.
+ * Copyright (c) 2010-2018 by the respective copyright holders.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -80,6 +80,8 @@ public class RFXComLighting4MessageTest {
         testMessage("091300021D155C01E960", PT2262, "119125", 489, ON_12, 2, 2, 4, 12);
         testMessage("091300D345DD99018C50", PT2262, "286169", 396, ON_9, 211, 2, 4, 9);
         testMessage("09130035D149A2017750", PT2262, "857242", 375, OFF_2, 53, 2, 2, 1);
+        testMessage("0913000B4E462A012280", PT2262, "320610", 290, ON_10, 11, 3, 4, 10);
+        testMessage("09130009232D2E013970", PT2262, "144082", 313, OFF_14, 9, 2, 14, 1);
         testMessage("091300CA0F8D2801AA70", PT2262, "63698", 426, (byte)8, 202, 2, 8, 1);
     }
 

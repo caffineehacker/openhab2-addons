@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2017 by the respective copyright holders.
+ * Copyright (c) 2010-2018 by the respective copyright holders.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -23,6 +23,7 @@ import org.eclipse.smarthome.core.thing.ThingUID;
 import org.eclipse.smarthome.io.transport.mdns.discovery.MDNSDiscoveryParticipant;
 import org.openhab.binding.pulseaudio.PulseaudioBindingConstants;
 import org.openhab.binding.pulseaudio.handler.PulseaudioBridgeHandler;
+import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Tobias Bräutigam - Initial contribution
  */
+@Component(immediate = true)
 public class PulseaudioDiscoveryParticipant implements MDNSDiscoveryParticipant {
 
     private Logger logger = LoggerFactory.getLogger(PulseaudioDiscoveryParticipant.class);
